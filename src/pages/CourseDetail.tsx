@@ -8,32 +8,27 @@ import {
 } from "@/components/ui/accordion";
 import {
   CheckCircle2,
-  Star,
   ArrowRight,
-  Briefcase,
-  TrendingUp,
-  Award,
   Shield,
-  Clock,
-  Users,
-  Figma,
-  Palette,
-  Layout,
-  PenTool,
-  Search,
-  FileText,
-  Layers,
-  Monitor,
-  Smartphone,
-  Globe,
-  BarChart3,
-  Lightbulb,
-  BookOpen,
-  GraduationCap,
+  Award,
   ChevronRight,
   Quote,
 } from "lucide-react";
 import { useState, useEffect } from "react";
+
+// Image imports
+import heroMockup from "@/assets/hero-mockup.jpg";
+import portfolioFintech from "@/assets/portfolio-fintech.jpg";
+import portfolioEcommerce from "@/assets/portfolio-ecommerce.jpg";
+import portfolioHealth from "@/assets/portfolio-health.jpg";
+import portfolioSaas from "@/assets/portfolio-saas.jpg";
+import toolFigma from "@/assets/tools/figma.png";
+import toolMiro from "@/assets/tools/miro.png";
+import toolNotion from "@/assets/tools/notion.png";
+import toolChatgpt from "@/assets/tools/chatgpt.png";
+import toolFramer from "@/assets/tools/framer.png";
+import toolProtopie from "@/assets/tools/protopie.png";
+import toolSpline from "@/assets/tools/spline.png";
 
 /* ─── Data ─── */
 
@@ -65,10 +60,10 @@ const careerChips = [
 ];
 
 const portfolioItems = [
-  { name: "Siddhi Sharma", project: "FinTech Dashboard" },
-  { name: "Kishan Jha", project: "E-commerce Redesign" },
-  { name: "Suraj Negi", project: "Health App Concept" },
-  { name: "Aspirations Digital", project: "SaaS Landing Page" },
+  { name: "Siddhi Sharma", project: "FinTech Dashboard", image: portfolioFintech },
+  { name: "Kishan Jha", project: "E-commerce Redesign", image: portfolioEcommerce },
+  { name: "Suraj Negi", project: "Health App Concept", image: portfolioHealth },
+  { name: "Aspirations Digital", project: "SaaS Landing Page", image: portfolioSaas },
 ];
 
 const companies = ["Google", "Microsoft", "Deloitte", "KPMG", "HCL", "TCS", "Capgemini", "Snapdeal"];
@@ -136,14 +131,13 @@ const skillsCovered = [
 ];
 
 const tools = [
-  { name: "Figma", icon: Figma },
-  { name: "Miro", icon: Layout },
-  { name: "Notion", icon: FileText },
-  { name: "ChatGPT", icon: Lightbulb },
-  { name: "Framer", icon: Monitor },
-  { name: "ProtoPie", icon: Smartphone },
-  { name: "Balsamiq", icon: PenTool },
-  { name: "FigJam", icon: Layers },
+  { name: "Figma", logo: toolFigma },
+  { name: "Miro", logo: toolMiro },
+  { name: "Notion", logo: toolNotion },
+  { name: "ChatGPT", logo: toolChatgpt },
+  { name: "Framer", logo: toolFramer },
+  { name: "ProtoPie", logo: toolProtopie },
+  { name: "Spline", logo: toolSpline },
 ];
 
 const curriculum = [
@@ -157,9 +151,9 @@ const curriculum = [
 ];
 
 const testimonials = [
-  { name: "Ananya R.", role: "Junior UX Designer at Google", quote: "Slate Academy's hands-on approach got me my dream job. The portfolio I built during the course was my biggest asset in interviews." },
-  { name: "Rohan K.", role: "Product Designer at a Startup", quote: "I switched from marketing to design in 8 months. The mentorship and real projects made all the difference." },
-  { name: "Priya M.", role: "Freelance UI Designer", quote: "The career guidance and placement support helped me land my first 3 freelance clients within weeks of graduating." },
+  { name: "Ananya R.", role: "Junior UX Designer at Google", quote: "Slate Academy's hands-on approach got me my dream job. The portfolio I built during the course was my biggest asset in interviews.", initials: "AR" },
+  { name: "Rohan K.", role: "Product Designer at a Startup", quote: "I switched from marketing to design in 8 months. The mentorship and real projects made all the difference.", initials: "RK" },
+  { name: "Priya M.", role: "Freelance UI Designer", quote: "The career guidance and placement support helped me land my first 3 freelance clients within weeks of graduating.", initials: "PM" },
 ];
 
 const faqs = [
@@ -226,10 +220,14 @@ const CourseDetail = () => {
               </Button>
             </div>
           </div>
-          <div className="animate-fade-up-delay-1 aspect-video overflow-hidden rounded-2xl bg-accent">
-            <div className="flex h-full items-center justify-center text-accent-foreground/60">
-              <Monitor size={64} strokeWidth={1} />
-            </div>
+          <div className="animate-fade-up-delay-1 overflow-hidden rounded-2xl shadow-xl">
+            <img
+              src={heroMockup}
+              alt="UI/UX Design Dashboard Mockup showing web and mobile app interfaces"
+              width={1280}
+              height={832}
+              className="h-auto w-full object-cover"
+            />
           </div>
         </div>
       </section>
@@ -264,10 +262,17 @@ const CourseDetail = () => {
             {portfolioItems.map((p) => (
               <div
                 key={p.name}
-                className="group overflow-hidden rounded-xl border border-border bg-card transition-shadow hover:shadow-lg"
+                className="group overflow-hidden rounded-xl border border-border bg-card transition-all hover:shadow-lg hover:-translate-y-1 duration-300"
               >
-                <div className="aspect-[4/3] bg-accent flex items-center justify-center">
-                  <Palette size={32} className="text-accent-foreground/40" />
+                <div className="aspect-[4/3] overflow-hidden">
+                  <img
+                    src={p.image}
+                    alt={`${p.project} — UI/UX case study by ${p.name}`}
+                    loading="lazy"
+                    width={800}
+                    height={600}
+                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
                 </div>
                 <div className="p-4">
                   <h4 className="font-semibold">{p.name}</h4>
@@ -404,13 +409,20 @@ const CourseDetail = () => {
       {/* ── SECTION 11: TOOLS ── */}
       <section className="container py-16">
         <SectionHeading>Tools You'll Use</SectionHeading>
-        <div className="mt-8 grid grid-cols-4 gap-4 sm:grid-cols-8">
+        <div className="mt-8 grid grid-cols-3 gap-5 sm:grid-cols-4 md:grid-cols-7">
           {tools.map((t) => (
             <div
               key={t.name}
-              className="flex flex-col items-center gap-2 rounded-xl border border-border bg-card p-4 transition-shadow hover:shadow-md"
+              className="flex flex-col items-center gap-3 rounded-xl border border-border bg-card p-5 transition-shadow hover:shadow-md"
             >
-              <t.icon size={28} className="text-foreground" />
+              <img
+                src={t.logo}
+                alt={`${t.name} logo`}
+                loading="lazy"
+                width={48}
+                height={48}
+                className="h-12 w-12 object-contain"
+              />
               <span className="text-xs font-medium text-muted-foreground">{t.name}</span>
             </div>
           ))}
@@ -450,8 +462,8 @@ const CourseDetail = () => {
                 "{t.quote}"
               </p>
               <div className="mt-4 flex items-center gap-3">
-                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-accent text-xs font-bold text-accent-foreground">
-                  {t.name.split(" ").map((n) => n[0]).join("")}
+                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">
+                  {t.initials}
                 </div>
                 <div>
                   <p className="text-sm font-semibold">{t.name}</p>
