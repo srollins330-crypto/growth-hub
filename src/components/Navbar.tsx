@@ -4,10 +4,11 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
-  { label: "Courses", href: "/course" },
+  { label: "Courses", href: "/courses" },
   { label: "About", href: "/about" },
   { label: "Careers", href: "/careers" },
   { label: "Blog", href: "/blog" },
+  { label: "Support", href: "/support" },
 ];
 
 const Navbar = () => {
@@ -28,7 +29,9 @@ const Navbar = () => {
               key={link.href}
               to={link.href}
               className={`text-sm font-medium transition-colors hover:text-primary ${
-                location.pathname === link.href ? "text-primary" : "text-muted-foreground"
+                location.pathname === link.href || location.pathname.startsWith(link.href + "/")
+                  ? "text-primary"
+                  : "text-muted-foreground"
               }`}
             >
               {link.label}
