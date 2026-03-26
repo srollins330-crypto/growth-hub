@@ -17,7 +17,7 @@ const Navbar = () => {
     <nav className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-lg">
       <div className="container flex h-16 items-center justify-between">
         <Link to="/" className="text-xl font-bold tracking-tight text-foreground">
-          Skill<span className="text-primary">Path</span>
+          Slate<span className="text-primary"> Academy</span>
         </Link>
 
         {/* Desktop */}
