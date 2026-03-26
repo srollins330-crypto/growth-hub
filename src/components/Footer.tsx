@@ -6,7 +6,7 @@ const Footer = () => (
       <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-4">
         <div>
           <h4 className="mb-3 text-sm font-bold text-foreground">
-            Skill<span className="text-primary">Path</span>
+            Slate<span className="text-primary"> Academy</span>
           </h4>
           <p className="text-sm text-muted-foreground">
             Building skills that matter for the careers of tomorrow.
