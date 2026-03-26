@@ -16,10 +16,10 @@ const Index = () => (
       </p>
       <div className="animate-fade-up-delay-2 mt-8 flex gap-3">
         <Button asChild size="lg">
-          <Link to="/about">Learn More <ArrowRight size={16} /></Link>
+          <Link to="/course">Explore Courses <ArrowRight size={16} /></Link>
         </Button>
         <Button asChild size="lg" variant="outline">
-          <Link to="/blog">Read Blog</Link>
+          <Link to="/about">Learn More</Link>
         </Button>
       </div>
     </section>

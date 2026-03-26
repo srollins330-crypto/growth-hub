@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
+  { label: "Courses", href: "/course" },
   { label: "About", href: "/about" },
   { label: "Careers", href: "/careers" },
   { label: "Blog", href: "/blog" },
@@ -17,7 +18,7 @@ const Navbar = () => {
     <nav className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-lg">
       <div className="container flex h-16 items-center justify-between">
         <Link to="/" className="text-xl font-bold tracking-tight text-foreground">
-          Skill<span className="text-primary">Path</span>
+          Slate<span className="text-primary"> Academy</span>
         </Link>
 
         {/* Desktop */}
