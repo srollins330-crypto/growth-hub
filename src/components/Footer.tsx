@@ -38,7 +38,7 @@ const Footer = () => (
         </div>
       </div>
       <div className="mt-10 border-t border-border pt-6 text-center text-xs text-muted-foreground">
-        © {new Date().getFullYear()} SkillPath. All rights reserved.
+        © {new Date().getFullYear()} Slate Academy. All rights reserved.
       </div>
     </div>
   </footer>
