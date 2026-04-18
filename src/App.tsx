@@ -12,6 +12,19 @@ import CategoryPage from "./pages/CategoryPage";
 import CourseDetail from "./pages/CourseDetail";
 import Support from "./pages/Support";
 import NotFound from "./pages/NotFound";
+import AdminDashboard from "./admin/pages/Dashboard";
+import AdminLeads from "./admin/pages/Leads";
+import AdminStudents from "./admin/pages/Students";
+import AdminCourses from "./admin/pages/Courses";
+import AdminClasses from "./admin/pages/Classes";
+import AdminTeachers from "./admin/pages/Teachers";
+import AdminCMS from "./admin/pages/CMS";
+import AdminBlog from "./admin/pages/Blog";
+import AdminMedia from "./admin/pages/Media";
+import AdminPayments from "./admin/pages/Payments";
+import AdminCommunication from "./admin/pages/Communication";
+import AdminAnalytics from "./admin/pages/Analytics";
+import AdminSettings from "./admin/pages/Settings";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +43,19 @@ const App = () => (
           <Route path="/careers" element={<Careers />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/support" element={<Support />} />
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/leads" element={<AdminLeads />} />
+          <Route path="/admin/students" element={<AdminStudents />} />
+          <Route path="/admin/courses" element={<AdminCourses />} />
+          <Route path="/admin/classes" element={<AdminClasses />} />
+          <Route path="/admin/teachers" element={<AdminTeachers />} />
+          <Route path="/admin/cms" element={<AdminCMS />} />
+          <Route path="/admin/blog" element={<AdminBlog />} />
+          <Route path="/admin/media" element={<AdminMedia />} />
+          <Route path="/admin/payments" element={<AdminPayments />} />
+          <Route path="/admin/communication" element={<AdminCommunication />} />
+          <Route path="/admin/analytics" element={<AdminAnalytics />} />
+          <Route path="/admin/settings" element={<AdminSettings />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
