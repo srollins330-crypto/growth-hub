@@ -1,25 +1,13 @@
 import { ReactNode, useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import {
-  LayoutDashboard,
-  Users,
-  GraduationCap,
-  BookOpen,
-  CalendarDays,
-  FileText,
-  Image as ImageIcon,
-  CreditCard,
-  MessagesSquare,
-  BarChart3,
-  Settings,
-  Search,
-  Bell,
-  Sun,
-  Moon,
-  Menu,
-  X,
-  ChevronDown,
-  Sparkles,
+  LayoutDashboard, Users, GraduationCap, BookOpen, CalendarDays, FileText,
+  Image as ImageIcon, CreditCard, MessagesSquare, BarChart3, Settings,
+  Search, Bell, Sun, Moon, Menu, X, ChevronDown, Sparkles,
+  Phone, ListChecks, Megaphone, Video, Library, Award, FileBadge,
+  Building2, Briefcase, Trophy, LineChart, Layout, Menu as MenuIcon,
+  FormInput, Globe, Star, Mail, MessageSquare, Gift, Link2, Ticket,
+  Wallet, Receipt, TrendingUp,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -38,30 +26,69 @@ const NAV: NavGroup[] = [
   {
     label: "CRM",
     items: [
-      { to: "/admin/leads", label: "Leads", icon: Sparkles },
+      { to: "/admin/leads", label: "Pipelines", icon: Sparkles },
       { to: "/admin/students", label: "Students", icon: Users },
+      { to: "/admin/crm/follow-ups", label: "Follow-ups", icon: ListChecks },
+      { to: "/admin/crm/call-logs", label: "Call Logs", icon: Phone },
+      { to: "/admin/crm/campaigns", label: "Campaigns", icon: Megaphone },
     ],
   },
   {
     label: "Academy",
     items: [
+      { to: "/admin/classes", label: "Live Classes", icon: CalendarDays },
+      { to: "/admin/academy/recorded", label: "Recorded Courses", icon: Video },
       { to: "/admin/courses", label: "Courses", icon: BookOpen },
-      { to: "/admin/classes", label: "Classes", icon: CalendarDays },
-      { to: "/admin/teachers", label: "Teachers", icon: GraduationCap },
+      { to: "/admin/teachers", label: "Mentors", icon: GraduationCap },
+      { to: "/admin/academy/knowledge-hub", label: "KnowledgeHub", icon: Library },
+      { to: "/admin/academy/assignments", label: "Assignments", icon: FileBadge },
+      { to: "/admin/academy/certificates", label: "Certificates", icon: Award },
+    ],
+  },
+  {
+    label: "Placements",
+    items: [
+      { to: "/admin/placements/partners", label: "Hiring Partners", icon: Building2 },
+      { to: "/admin/placements/students", label: "Student Placements", icon: Briefcase },
+      { to: "/admin/placements/opportunities", label: "Opportunities", icon: Briefcase },
+      { to: "/admin/placements/success-stories", label: "Success Stories", icon: Trophy },
+      { to: "/admin/placements/analytics", label: "Placement Analytics", icon: LineChart },
     ],
   },
   {
     label: "Website",
     items: [
+      { to: "/admin/website/landing-pages", label: "Landing Pages", icon: Layout },
+      { to: "/admin/website/navigation", label: "Navigation Menus", icon: MenuIcon },
+      { to: "/admin/website/forms", label: "Forms", icon: FormInput },
+      { to: "/admin/website/seo", label: "SEO", icon: Globe },
+      { to: "/admin/website/testimonials", label: "Testimonials", icon: Star },
       { to: "/admin/cms", label: "Pages", icon: FileText },
       { to: "/admin/blog", label: "Blog", icon: FileText },
       { to: "/admin/media", label: "Media", icon: ImageIcon },
     ],
   },
   {
+    label: "Marketing",
+    items: [
+      { to: "/admin/marketing/email", label: "Email Campaigns", icon: Mail },
+      { to: "/admin/marketing/whatsapp", label: "WhatsApp Campaigns", icon: MessageSquare },
+      { to: "/admin/marketing/referrals", label: "Referral System", icon: Gift },
+      { to: "/admin/marketing/affiliates", label: "Affiliates", icon: Link2 },
+      { to: "/admin/marketing/coupons", label: "Coupons", icon: Ticket },
+    ],
+  },
+  {
+    label: "Finance",
+    items: [
+      { to: "/admin/finance/installments", label: "Installments", icon: Wallet },
+      { to: "/admin/payments", label: "Invoices", icon: Receipt },
+      { to: "/admin/finance/revenue", label: "Revenue Reports", icon: TrendingUp },
+    ],
+  },
+  {
     label: "Business",
     items: [
-      { to: "/admin/payments", label: "Payments", icon: CreditCard },
       { to: "/admin/communication", label: "Communication", icon: MessagesSquare },
       { to: "/admin/analytics", label: "Analytics", icon: BarChart3 },
       { to: "/admin/settings", label: "Settings", icon: Settings },
@@ -108,7 +135,7 @@ const SidebarContent = ({ onNavigate }: { onNavigate?: () => void }) => {
                 const isActive =
                   item.to === "/admin"
                     ? location.pathname === "/admin"
-                    : location.pathname.startsWith(item.to);
+                    : location.pathname === item.to;
                 return (
                   <NavLink
                     key={item.to}
@@ -156,19 +183,14 @@ const AdminLayout = ({ children, title, subtitle, actions }: {
 
   return (
     <div className="flex min-h-screen w-full bg-background text-foreground">
-      {/* Desktop sidebar */}
       <aside className="hidden w-64 shrink-0 border-r border-border bg-card lg:block">
         <SidebarContent />
       </aside>
 
-      {/* Mobile sidebar */}
       {mobileOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
-          <div
-            className="absolute inset-0 bg-foreground/40 backdrop-blur-sm"
-            onClick={() => setMobileOpen(false)}
-          />
-          <aside className="absolute left-0 top-0 h-full w-72 border-r border-border bg-card">
+          <div className="absolute inset-0 bg-foreground/40 backdrop-blur-sm" onClick={() => setMobileOpen(false)} />
+          <aside className="absolute left-0 top-0 h-full w-72 border-r border-border bg-card overflow-y-auto">
             <button
               className="absolute right-3 top-3 rounded-md p-1.5 text-muted-foreground hover:bg-secondary"
               onClick={() => setMobileOpen(false)}
@@ -182,7 +204,6 @@ const AdminLayout = ({ children, title, subtitle, actions }: {
       )}
 
       <div className="flex min-w-0 flex-1 flex-col">
-        {/* Top bar */}
         <header className="sticky top-0 z-30 flex h-16 items-center gap-3 border-b border-border bg-background/80 px-4 backdrop-blur md:px-6">
           <button
             className="rounded-md p-2 text-muted-foreground hover:bg-secondary lg:hidden"
@@ -191,12 +212,10 @@ const AdminLayout = ({ children, title, subtitle, actions }: {
           >
             <Menu size={18} />
           </button>
-
           <div className="relative hidden flex-1 max-w-md md:block">
             <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
             <Input placeholder="Search students, courses, leads…" className="h-9 pl-9 bg-secondary/60 border-transparent focus-visible:bg-background" />
           </div>
-
           <div className="ml-auto flex items-center gap-2">
             <Button variant="ghost" size="icon" onClick={toggle} aria-label="Toggle theme">
               {theme === "light" ? <Moon size={16} /> : <Sun size={16} />}
@@ -206,9 +225,7 @@ const AdminLayout = ({ children, title, subtitle, actions }: {
               <span className="absolute right-2 top-2 h-1.5 w-1.5 rounded-full bg-primary" />
             </Button>
             <button className="flex items-center gap-2 rounded-lg border border-border px-2 py-1.5 hover:bg-secondary">
-              <div className="flex h-7 w-7 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
-                SA
-              </div>
+              <div className="flex h-7 w-7 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">SA</div>
               <div className="hidden text-left leading-tight md:block">
                 <div className="text-xs font-semibold">Sara Admin</div>
                 <div className="text-[10px] text-muted-foreground">Super Admin</div>
@@ -218,7 +235,6 @@ const AdminLayout = ({ children, title, subtitle, actions }: {
           </div>
         </header>
 
-        {/* Page header */}
         <div className="border-b border-border bg-card/40 px-4 py-5 md:px-8">
           <div className="flex flex-wrap items-end justify-between gap-3">
             <div>
@@ -229,7 +245,6 @@ const AdminLayout = ({ children, title, subtitle, actions }: {
           </div>
         </div>
 
-        {/* Content */}
         <main className="flex-1 px-4 py-6 md:px-8">{children}</main>
       </div>
     </div>

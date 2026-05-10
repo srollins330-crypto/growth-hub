@@ -12,6 +12,7 @@ import CategoryPage from "./pages/CategoryPage";
 import CourseDetail from "./pages/CourseDetail";
 import Support from "./pages/Support";
 import NotFound from "./pages/NotFound";
+
 import AdminDashboard from "./admin/pages/Dashboard";
 import AdminLeads from "./admin/pages/Leads";
 import AdminStudents from "./admin/pages/Students";
@@ -25,6 +26,36 @@ import AdminPayments from "./admin/pages/Payments";
 import AdminCommunication from "./admin/pages/Communication";
 import AdminAnalytics from "./admin/pages/Analytics";
 import AdminSettings from "./admin/pages/Settings";
+
+import FollowUps from "./admin/pages/crm/FollowUps";
+import CallLogs from "./admin/pages/crm/CallLogs";
+import Campaigns from "./admin/pages/crm/Campaigns";
+
+import RecordedCourses from "./admin/pages/academy/RecordedCourses";
+import KnowledgeHub from "./admin/pages/academy/KnowledgeHub";
+import Assignments from "./admin/pages/academy/Assignments";
+import Certificates from "./admin/pages/academy/Certificates";
+
+import HiringPartners from "./admin/pages/placements/HiringPartners";
+import StudentPlacements from "./admin/pages/placements/StudentPlacements";
+import Opportunities from "./admin/pages/placements/Opportunities";
+import SuccessStories from "./admin/pages/placements/SuccessStories";
+import PlacementAnalytics from "./admin/pages/placements/PlacementAnalytics";
+
+import LandingPages from "./admin/pages/website/LandingPages";
+import NavigationMenus from "./admin/pages/website/NavigationMenus";
+import Forms from "./admin/pages/website/Forms";
+import SEO from "./admin/pages/website/SEO";
+import Testimonials from "./admin/pages/website/Testimonials";
+
+import EmailCampaigns from "./admin/pages/marketing/EmailCampaigns";
+import WhatsAppCampaigns from "./admin/pages/marketing/WhatsAppCampaigns";
+import Referrals from "./admin/pages/marketing/Referrals";
+import Affiliates from "./admin/pages/marketing/Affiliates";
+import MarketingCoupons from "./admin/pages/marketing/Coupons";
+
+import Installments from "./admin/pages/finance/Installments";
+import RevenueReports from "./admin/pages/finance/RevenueReports";
 
 const queryClient = new QueryClient();
 
@@ -43,6 +74,8 @@ const App = () => (
           <Route path="/careers" element={<Careers />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/support" element={<Support />} />
+
+          {/* Admin */}
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/admin/leads" element={<AdminLeads />} />
           <Route path="/admin/students" element={<AdminStudents />} />
@@ -56,6 +89,43 @@ const App = () => (
           <Route path="/admin/communication" element={<AdminCommunication />} />
           <Route path="/admin/analytics" element={<AdminAnalytics />} />
           <Route path="/admin/settings" element={<AdminSettings />} />
+
+          {/* CRM */}
+          <Route path="/admin/crm/follow-ups" element={<FollowUps />} />
+          <Route path="/admin/crm/call-logs" element={<CallLogs />} />
+          <Route path="/admin/crm/campaigns" element={<Campaigns />} />
+
+          {/* Academy */}
+          <Route path="/admin/academy/recorded" element={<RecordedCourses />} />
+          <Route path="/admin/academy/knowledge-hub" element={<KnowledgeHub />} />
+          <Route path="/admin/academy/assignments" element={<Assignments />} />
+          <Route path="/admin/academy/certificates" element={<Certificates />} />
+
+          {/* Placements */}
+          <Route path="/admin/placements/partners" element={<HiringPartners />} />
+          <Route path="/admin/placements/students" element={<StudentPlacements />} />
+          <Route path="/admin/placements/opportunities" element={<Opportunities />} />
+          <Route path="/admin/placements/success-stories" element={<SuccessStories />} />
+          <Route path="/admin/placements/analytics" element={<PlacementAnalytics />} />
+
+          {/* Website */}
+          <Route path="/admin/website/landing-pages" element={<LandingPages />} />
+          <Route path="/admin/website/navigation" element={<NavigationMenus />} />
+          <Route path="/admin/website/forms" element={<Forms />} />
+          <Route path="/admin/website/seo" element={<SEO />} />
+          <Route path="/admin/website/testimonials" element={<Testimonials />} />
+
+          {/* Marketing */}
+          <Route path="/admin/marketing/email" element={<EmailCampaigns />} />
+          <Route path="/admin/marketing/whatsapp" element={<WhatsAppCampaigns />} />
+          <Route path="/admin/marketing/referrals" element={<Referrals />} />
+          <Route path="/admin/marketing/affiliates" element={<Affiliates />} />
+          <Route path="/admin/marketing/coupons" element={<MarketingCoupons />} />
+
+          {/* Finance */}
+          <Route path="/admin/finance/installments" element={<Installments />} />
+          <Route path="/admin/finance/revenue" element={<RevenueReports />} />
+
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
