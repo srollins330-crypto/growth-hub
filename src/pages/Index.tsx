@@ -99,57 +99,118 @@ const Index = () => {
 
   return (
     <PageLayout>
-      {/* ─────────── HERO ─────────── */}
-      <section className="relative -mt-16 overflow-hidden bg-hero pt-32 md:-mt-20 md:pt-40">
-        <div className="absolute inset-0 grid-bg" />
-        {/* Floating orbs */}
-        <div className="pointer-events-none absolute left-1/4 top-1/4 h-72 w-72 rounded-full bg-primary/30 blur-3xl animate-pulse-glow" />
-        <div className="pointer-events-none absolute right-1/4 top-1/3 h-96 w-96 rounded-full bg-accent/20 blur-3xl animate-pulse-glow" style={{ animationDelay: "2s" }} />
-        {/* Floating shapes */}
-        <div className="pointer-events-none absolute left-[8%] top-[30%] hidden h-16 w-16 rotate-12 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md animate-float lg:block" />
-        <div className="pointer-events-none absolute right-[10%] top-[25%] hidden h-20 w-20 rounded-full border border-primary/30 bg-primary/10 backdrop-blur-md animate-float-slow lg:block" />
-        <div className="pointer-events-none absolute right-[15%] bottom-[20%] hidden h-12 w-12 rotate-45 rounded-xl border border-accent/30 bg-accent/10 backdrop-blur-md animate-float lg:block" style={{ animationDelay: "1.5s" }} />
+      {/* ─────────── HERO (Split Screen) ─────────── */}
+      <section className="relative -mt-16 min-h-screen overflow-hidden bg-hero pt-24 md:-mt-20 md:pt-28">
+        <div className="absolute inset-0 grid-bg opacity-60" />
+        <div className="pointer-events-none absolute -left-32 top-1/4 h-[28rem] w-[28rem] rounded-full bg-primary/25 blur-[120px] animate-pulse-glow" />
+        <div className="pointer-events-none absolute -right-32 bottom-0 h-[32rem] w-[32rem] rounded-full bg-accent/25 blur-[120px] animate-pulse-glow" style={{ animationDelay: "2s" }} />
 
-        <div className="container relative pb-28 pt-12 text-center md:pb-40 md:pt-20">
-          <div className="animate-fade-up mx-auto inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-medium text-muted-foreground backdrop-blur-md">
-            <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-            Cohort '26 enrolment is now live
-          </div>
-
-          <h1 className="animate-fade-up-delay-1 mx-auto mt-6 max-w-5xl font-display text-5xl font-bold leading-[1.05] tracking-tight md:text-7xl lg:text-8xl">
-            <span className="text-gradient">OWN YOUR SLATE.</span>
-            <br />
-            <span className="text-gradient-brand">WRITE YOUR FUTURE.</span>
-          </h1>
-
-          <p className="animate-fade-up-delay-2 mx-auto mt-7 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
-            Welcome to a place where ambition meets action. Real curiosity meets real skills —
-            delivered through industry-ready courses in design, code, marketing and more.
-            <span className="block mt-1 text-foreground/70">No fluff. No filler. Just real growth.</span>
-          </p>
-
-          <div className="animate-fade-up-delay-3 mt-10 flex flex-wrap items-center justify-center gap-3">
-            <Button asChild size="lg" className="rounded-full bg-gradient-primary px-8 text-base shadow-xl shadow-primary/30 hover:shadow-primary/50 hover:opacity-95 transition-all">
-              <Link to="/courses">Explore Courses <ArrowRight size={18} /></Link>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="rounded-full border-white/15 bg-white/5 px-8 text-base backdrop-blur-md hover:bg-white/10">
-              <Link to="/courses">Start Your Career</Link>
-            </Button>
-          </div>
-
-          {/* Marquee microcopy */}
-          <div className="mt-20 overflow-hidden">
-            <div className="flex w-max animate-marquee gap-12 text-sm font-medium text-muted-foreground/60">
-              {[...Array(2)].map((_, i) => (
-                <div key={i} className="flex items-center gap-12">
-                  <span>✦ Skills In. Limits Out.</span>
-                  <span>✦ Fresh Slate. Fearless Future.</span>
-                  <span>✦ Dream It. Slate It. Own It.</span>
-                  <span>✦ Your Future. Your Rules.</span>
-                  <span>✦ New Skills. Fresh Start. Clean Slate.</span>
-                </div>
-              ))}
+        <div className="container relative grid min-h-[calc(100vh-6rem)] grid-cols-1 items-center gap-12 py-12 lg:grid-cols-2 lg:gap-8 lg:py-0">
+          {/* LEFT — Content */}
+          <div className="relative z-10">
+            <div className="animate-fade-up inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-medium text-muted-foreground backdrop-blur-md">
+              <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+              Cohort '26 enrolment is now live
             </div>
+
+            <h1 className="animate-fade-up-delay-1 mt-6 font-display text-5xl font-bold leading-[1.02] tracking-tight md:text-6xl xl:text-7xl">
+              <span className="text-gradient">OWN YOUR SLATE.</span>
+              <br />
+              <span className="text-gradient-brand">WRITE YOUR FUTURE.</span>
+            </h1>
+
+            <p className="animate-fade-up-delay-2 mt-7 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
+              Welcome to a place where ambition meets action. At Slate Academy, we help you write your story —
+              while you hold the chalk. Real curiosity meets real skills, delivered through industry-ready courses
+              in graphic design, UI/UX, data science, digital marketing and 3D design.
+              <span className="mt-2 block text-foreground/70">No fluff. No filler. Just real growth — and real fun along the way.</span>
+            </p>
+
+            <div className="animate-fade-up-delay-3 mt-9 flex flex-wrap items-center gap-3">
+              <Button asChild size="lg" className="group rounded-full bg-gradient-primary px-8 text-base shadow-xl shadow-primary/30 transition-all hover:shadow-primary/60 hover:opacity-95">
+                <Link to="/courses">
+                  Explore Courses
+                  <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
+                </Link>
+              </Button>
+              <Button asChild size="lg" variant="outline" className="rounded-full border-white/15 bg-white/5 px-8 text-base backdrop-blur-md hover:bg-white/10">
+                <Link to="/courses" className="story-link">Start Your Career</Link>
+              </Button>
+            </div>
+
+            <div className="animate-fade-up-delay-3 mt-10 flex items-center gap-6 text-xs text-muted-foreground/80">
+              <div className="flex -space-x-2">
+                {["AR","RK","PM","MJ"].map((i, k) => (
+                  <div key={i} className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-background bg-gradient-primary text-[10px] font-bold text-white" style={{ zIndex: 10 - k }}>{i}</div>
+                ))}
+              </div>
+              <div>
+                <p className="font-semibold text-foreground">5,000+ Slate-ers</p>
+                <p>building futures right now</p>
+              </div>
+            </div>
+          </div>
+
+          {/* RIGHT — Visual */}
+          <div className="animate-fade-up-delay-2 relative h-[420px] sm:h-[520px] lg:h-[640px]">
+            <div className="absolute inset-8 rounded-[2.5rem] bg-gradient-to-br from-primary/30 via-accent/20 to-primary/30 blur-2xl" />
+            <div className="relative h-full w-full overflow-hidden rounded-[2rem] border border-white/10 bg-card/40 shadow-2xl shadow-primary/20 backdrop-blur-sm">
+              <img
+                src={heroVisual}
+                alt="Floating UI design screens, 3D objects and creative tools illustrating Slate Academy's modern learning experience"
+                width={1280}
+                height={1280}
+                className="h-full w-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/0 to-background/30" />
+
+              <div className="animate-float absolute left-4 top-6 flex items-center gap-3 rounded-2xl border border-white/15 glass-strong px-4 py-3 shadow-xl sm:left-6 sm:top-10">
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-primary text-white">
+                  <PaletteIcon size={16} />
+                </div>
+                <div>
+                  <p className="text-xs font-semibold leading-tight">UI/UX Design</p>
+                  <p className="text-[10px] text-muted-foreground">12 weeks · Live</p>
+                </div>
+              </div>
+
+              <div className="animate-float-slow absolute right-4 top-1/3 flex items-center gap-3 rounded-2xl border border-white/15 glass-strong px-4 py-3 shadow-xl sm:right-6">
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent/80 text-white">
+                  <Layers size={16} />
+                </div>
+                <div>
+                  <p className="text-xs font-semibold leading-tight">3D Design</p>
+                  <p className="text-[10px] text-muted-foreground">Cohort '26</p>
+                </div>
+              </div>
+
+              <div className="animate-float absolute bottom-6 left-6 flex items-center gap-3 rounded-2xl border border-white/15 glass-strong px-4 py-3 shadow-xl" style={{ animationDelay: "1.2s" }}>
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/80 text-white">
+                  <Code2 size={16} />
+                </div>
+                <div>
+                  <p className="text-xs font-semibold leading-tight">96+ Hiring Partners</p>
+                  <p className="text-[10px] text-muted-foreground">Placement-ready</p>
+                </div>
+              </div>
+
+              <div className="absolute right-8 bottom-10 h-2 w-2 rounded-full bg-primary shadow-[0_0_20px_8px_hsl(var(--primary)/0.6)] animate-pulse" />
+              <div className="absolute left-1/2 top-12 h-1.5 w-1.5 rounded-full bg-accent shadow-[0_0_16px_6px_hsl(var(--accent)/0.6)] animate-pulse" style={{ animationDelay: "1s" }} />
+            </div>
+          </div>
+        </div>
+
+        <div className="relative mt-4 overflow-hidden pb-12">
+          <div className="flex w-max animate-marquee gap-12 text-sm font-medium text-muted-foreground/60">
+            {[...Array(2)].map((_, i) => (
+              <div key={i} className="flex items-center gap-12">
+                <span>✦ Skills In. Limits Out.</span>
+                <span>✦ Fresh Slate. Fearless Future.</span>
+                <span>✦ Dream It. Slate It. Own It.</span>
+                <span>✦ Your Future. Your Rules.</span>
+                <span>✦ New Skills. Fresh Start. Clean Slate.</span>
+              </div>
+            ))}
           </div>
         </div>
       </section>
