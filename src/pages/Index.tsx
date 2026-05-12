@@ -2,8 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import PageLayout from "@/components/PageLayout";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import heroVisual from "@/assets/hero-visual.jpg";
 import {
   ArrowRight,
+  Palette as PaletteIcon,
+  Code2,
+  Layers,
   Sparkles,
   Palette,
   Film,
