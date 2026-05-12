@@ -1,245 +1,349 @@
+import { useEffect, useRef, useState } from "react";
 import PageLayout from "@/components/PageLayout";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import {
   ArrowRight,
+  Sparkles,
   Palette,
-  Code,
-  BarChart3,
+  Film,
+  Layout,
+  Box,
   Megaphone,
-  Users,
-  Lightbulb,
-  Briefcase,
-  BookOpen,
-  FolderKanban,
-  Rocket,
-  CheckCircle2,
+  BarChart3,
+  Star,
   Quote,
-  GraduationCap,
+  Zap,
   Trophy,
-  TrendingUp,
+  GraduationCap,
+  Briefcase,
+  Users,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 
-/* ─── Data ─── */
+/* ── Animated Counter ── */
+function Counter({ end, suffix = "" }: { end: number; suffix?: string }) {
+  const [val, setVal] = useState(0);
+  const ref = useRef<HTMLSpanElement>(null);
+  const started = useRef(false);
 
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting && !started.current) {
+          started.current = true;
+          const duration = 1800;
+          const start = performance.now();
+          const tick = (now: number) => {
+            const t = Math.min(1, (now - start) / duration);
+            const eased = 1 - Math.pow(1 - t, 3);
+            setVal(Math.round(end * eased));
+            if (t < 1) requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+        }
+      },
+      { threshold: 0.4 }
+    );
+    if (ref.current) obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, [end]);
+
+  return (
+    <span ref={ref} className="font-display text-5xl font-bold text-gradient md:text-6xl">
+      {val}
+      {suffix}
+    </span>
+  );
+}
+
+/* ── Data ── */
 const stats = [
-  { value: "15,000+", label: "Students Enrolled" },
-  { value: "94%", label: "Completion Rate" },
-  { value: "87%", label: "Got Hired" },
-  { value: "4.9★", label: "Average Rating" },
+  { value: 15, suffix: "+", title: "Skills That Matter", desc: "Curated courses for explorers, learners and go-getters alike.", icon: Sparkles },
+  { value: 30, suffix: "+", title: "Learning by Doing", desc: "Assignments, projects and certificates to build real-world capabilities.", icon: Zap },
+  { value: 48, suffix: "Y", title: "Industry Experience", desc: "The cumulative industry experience of our mentors.", icon: GraduationCap },
+  { value: 96, suffix: "+", title: "Hiring Partners", desc: "Ample employment opportunities waiting to be fulfilled.", icon: Briefcase },
+  { value: 128, suffix: "+", title: "Success Stories", desc: "Placement opportunities provided to our students.", icon: Trophy },
+  { value: 5000, suffix: "+", title: "Slate-ers Strong", desc: "A growing community of ambitious learners building futures.", icon: Users },
 ];
 
-const categories = [
-  { icon: Palette, title: "Design", desc: "UI/UX, Graphic Design, Motion & 3D", href: "/courses/design", color: "bg-pink-50 text-pink-600 dark:bg-pink-950 dark:text-pink-400" },
-  { icon: Code, title: "Coding", desc: "Full Stack, MERN, MEAN & more", href: "/courses/coding", color: "bg-blue-50 text-blue-600 dark:bg-blue-950 dark:text-blue-400" },
-  { icon: Megaphone, title: "Marketing", desc: "SEO, Social Media, Content & Ads", href: "/courses/marketing", color: "bg-orange-50 text-orange-600 dark:bg-orange-950 dark:text-orange-400" },
-  { icon: BarChart3, title: "Data", desc: "Analytics, SQL, Python & Excel", href: "/courses/data", color: "bg-emerald-50 text-emerald-600 dark:bg-emerald-950 dark:text-emerald-400" },
-];
-
-const valueProps = [
-  { icon: Lightbulb, title: "Learn by Doing", desc: "Real projects from day one — not just theory." },
-  { icon: Users, title: "Expert Mentorship", desc: "1-on-1 guidance from industry professionals." },
-  { icon: Briefcase, title: "Career Support", desc: "Resume reviews, mock interviews & job referrals." },
-];
-
-const featuredCourses = [
-  { title: "UI/UX Design", tag: "Beginner", duration: "6 months", href: "/course" },
-  { title: "Full Stack Development", tag: "Intermediate", duration: "12 months", href: "/courses/coding" },
-  { title: "Data Analytics", tag: "Beginner", duration: "4 months", href: "/courses/data" },
-  { title: "Social Media Marketing", tag: "Beginner", duration: "3 months", href: "/courses/marketing" },
-  { title: "Graphic Design", tag: "Beginner", duration: "6 months", href: "/courses/design" },
-];
-
-const steps = [
-  { icon: BookOpen, label: "Learn", desc: "Master core concepts" },
-  { icon: Code, label: "Practice", desc: "Solve real challenges" },
-  { icon: FolderKanban, label: "Build", desc: "Create your portfolio" },
-  { icon: Rocket, label: "Get Hired", desc: "Land your dream role" },
+const courses = [
+  { icon: Palette, title: "Graphic Design", desc: "Tell visual stories through compelling designs made with the latest software.", tint: "from-pink-500/20 to-fuchsia-500/10" },
+  { icon: Film, title: "Motion Graphics", desc: "Bring life to your visuals through animation and special effects.", tint: "from-orange-500/20 to-amber-500/10" },
+  { icon: Layout, title: "UI/UX Design", desc: "Create aesthetic, engaging digital interfaces that impress and perform.", tint: "from-blue-500/20 to-cyan-500/10" },
+  { icon: Box, title: "3D Design", desc: "Elevate ideas through space designs, product mock-ups and cinematic effects.", tint: "from-purple-500/20 to-indigo-500/10" },
+  { icon: Megaphone, title: "Digital Marketing", desc: "Become a sought-after marketer with sharp business insights and tools.", tint: "from-emerald-500/20 to-teal-500/10" },
+  { icon: BarChart3, title: "Data Science & Analytics", desc: "Make sense of business data through the latest tools and techniques.", tint: "from-violet-500/20 to-blue-500/10" },
 ];
 
 const testimonials = [
-  { name: "Ananya R.", role: "UX Designer at Google", quote: "Slate Academy's hands-on approach got me my dream job in 8 months.", initials: "AR" },
-  { name: "Rohan K.", role: "Full Stack Dev at Razorpay", quote: "The mentorship and real projects made all the difference in my career switch.", initials: "RK" },
-  { name: "Priya M.", role: "Freelance Designer", quote: "I landed my first 3 clients within weeks of graduating. Incredible value.", initials: "PM" },
+  { name: "Ananya R.", role: "UX Designer @ Google", quote: "Slate Academy didn't just teach me design — it gave me the confidence to ship work I'm actually proud of. Got hired in 8 months.", initials: "AR", rating: 5 },
+  { name: "Rohan K.", role: "Full Stack Dev @ Razorpay", quote: "The mentorship felt like having a senior dev in my corner 24/7. Career switch made simple.", initials: "RK", rating: 5 },
+  { name: "Priya M.", role: "Freelance Designer", quote: "I landed my first 3 clients within weeks of graduating. The portfolio I built here did the talking.", initials: "PM", rating: 5 },
+  { name: "Karan S.", role: "Data Analyst @ Swiggy", quote: "Real projects, real feedback, real growth. No fluff, exactly what was promised.", initials: "KS", rating: 5 },
+  { name: "Meera J.", role: "Motion Designer", quote: "Learning here felt less like a chore and more like a cheat code. Loved every minute.", initials: "MJ", rating: 5 },
 ];
 
-/* ─── Page ─── */
-const Index = () => (
-  <PageLayout>
-    {/* ── HERO ── */}
-    <section className="container py-20 text-center md:py-28">
-      <h1 className="animate-fade-up text-4xl font-extrabold tracking-tight md:text-5xl lg:text-6xl">
-        Learn Skills That Actually<br />
-        <span className="text-primary">Get You Hired</span>
-      </h1>
-      <p className="animate-fade-up-delay-1 mx-auto mt-6 max-w-lg text-lg text-muted-foreground">
-        Design, Code, Market & Analyze — with real-world projects and career support.
-      </p>
-      <div className="animate-fade-up-delay-2 mt-8 flex flex-wrap justify-center gap-3">
-        <Button asChild size="lg">
-          <Link to="/courses">Start Learning <ArrowRight size={16} /></Link>
-        </Button>
-        <Button asChild size="lg" variant="outline">
-          <Link to="/courses">Explore Courses</Link>
-        </Button>
-      </div>
-    </section>
+/* ── Page ── */
+const Index = () => {
+  const [tIdx, setTIdx] = useState(0);
+  useEffect(() => {
+    const i = setInterval(() => setTIdx((p) => (p + 1) % testimonials.length), 5000);
+    return () => clearInterval(i);
+  }, []);
 
-    {/* ── TRUST STRIP ── */}
-    <section className="border-y border-border bg-surface">
-      <div className="container py-8">
-        <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
-          {stats.map((s) => (
-            <div key={s.label} className="text-center">
-              <p className="text-2xl font-extrabold text-foreground md:text-3xl">{s.value}</p>
-              <p className="mt-1 text-sm text-muted-foreground">{s.label}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
+  return (
+    <PageLayout>
+      {/* ─────────── HERO ─────────── */}
+      <section className="relative -mt-16 overflow-hidden bg-hero pt-32 md:-mt-20 md:pt-40">
+        <div className="absolute inset-0 grid-bg" />
+        {/* Floating orbs */}
+        <div className="pointer-events-none absolute left-1/4 top-1/4 h-72 w-72 rounded-full bg-primary/30 blur-3xl animate-pulse-glow" />
+        <div className="pointer-events-none absolute right-1/4 top-1/3 h-96 w-96 rounded-full bg-accent/20 blur-3xl animate-pulse-glow" style={{ animationDelay: "2s" }} />
+        {/* Floating shapes */}
+        <div className="pointer-events-none absolute left-[8%] top-[30%] hidden h-16 w-16 rotate-12 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md animate-float lg:block" />
+        <div className="pointer-events-none absolute right-[10%] top-[25%] hidden h-20 w-20 rounded-full border border-primary/30 bg-primary/10 backdrop-blur-md animate-float-slow lg:block" />
+        <div className="pointer-events-none absolute right-[15%] bottom-[20%] hidden h-12 w-12 rotate-45 rounded-xl border border-accent/30 bg-accent/10 backdrop-blur-md animate-float lg:block" style={{ animationDelay: "1.5s" }} />
 
-    {/* ── CATEGORIES ── */}
-    <section className="container py-16">
-      <h2 className="text-center text-2xl font-bold tracking-tight md:text-3xl">
-        What Do You Want to Learn?
-      </h2>
-      <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {categories.map((cat) => (
-          <Link
-            key={cat.title}
-            to={cat.href}
-            className="group rounded-xl border border-border bg-card p-6 transition-all hover:shadow-lg hover:-translate-y-1 duration-300"
-          >
-            <div className={`mb-4 flex h-12 w-12 items-center justify-center rounded-xl ${cat.color}`}>
-              <cat.icon size={24} />
-            </div>
-            <h3 className="text-lg font-semibold">{cat.title}</h3>
-            <p className="mt-1 text-sm text-muted-foreground">{cat.desc}</p>
-            <span className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100">
-              Explore <ArrowRight size={14} />
-            </span>
-          </Link>
-        ))}
-      </div>
-    </section>
+        <div className="container relative pb-28 pt-12 text-center md:pb-40 md:pt-20">
+          <div className="animate-fade-up mx-auto inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-medium text-muted-foreground backdrop-blur-md">
+            <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+            Cohort '26 enrolment is now live
+          </div>
 
-    {/* ── VALUE PROPOSITION ── */}
-    <section className="bg-surface">
-      <div className="container py-16">
-        <h2 className="text-center text-2xl font-bold tracking-tight md:text-3xl">
-          Why Slate Academy?
-        </h2>
-        <div className="mt-10 grid gap-6 md:grid-cols-3">
-          {valueProps.map((v) => (
-            <div key={v.title} className="rounded-xl border border-border bg-card p-6 transition-shadow hover:shadow-md">
-              <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-accent text-accent-foreground">
-                <v.icon size={20} />
-              </div>
-              <h3 className="font-semibold">{v.title}</h3>
-              <p className="mt-1 text-sm text-muted-foreground">{v.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
+          <h1 className="animate-fade-up-delay-1 mx-auto mt-6 max-w-5xl font-display text-5xl font-bold leading-[1.05] tracking-tight md:text-7xl lg:text-8xl">
+            <span className="text-gradient">OWN YOUR SLATE.</span>
+            <br />
+            <span className="text-gradient-brand">WRITE YOUR FUTURE.</span>
+          </h1>
 
-    {/* ── FEATURED COURSES ── */}
-    <section className="container py-16">
-      <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold tracking-tight md:text-3xl">Featured Courses</h2>
-        <Button asChild variant="ghost" className="hidden sm:flex">
-          <Link to="/courses">View All <ArrowRight size={14} /></Link>
-        </Button>
-      </div>
-      <div className="mt-8 flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
-        {featuredCourses.map((c) => (
-          <Link
-            key={c.title}
-            to={c.href}
-            className="min-w-[260px] shrink-0 rounded-xl border border-border bg-card p-5 transition-all hover:shadow-md hover:-translate-y-0.5 duration-300"
-          >
-            <div className="mb-3 aspect-[16/9] rounded-lg bg-accent" />
-            <div className="flex items-center gap-2">
-              <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary">{c.tag}</span>
-              <span className="text-xs text-muted-foreground">{c.duration}</span>
-            </div>
-            <h3 className="mt-2 font-semibold">{c.title}</h3>
-          </Link>
-        ))}
-      </div>
-      <Button asChild variant="outline" className="mt-4 w-full sm:hidden">
-        <Link to="/courses">View All Courses</Link>
-      </Button>
-    </section>
+          <p className="animate-fade-up-delay-2 mx-auto mt-7 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
+            Welcome to a place where ambition meets action. Real curiosity meets real skills —
+            delivered through industry-ready courses in design, code, marketing and more.
+            <span className="block mt-1 text-foreground/70">No fluff. No filler. Just real growth.</span>
+          </p>
 
-    {/* ── LEARNING FLOW ── */}
-    <section className="bg-surface">
-      <div className="container py-16">
-        <h2 className="text-center text-2xl font-bold tracking-tight md:text-3xl">
-          Your Learning Journey
-        </h2>
-        <div className="mt-10 flex flex-col items-center gap-0 md:flex-row md:justify-center md:gap-0">
-          {steps.map((step, i) => (
-            <div key={step.label} className="flex items-center">
-              <div className="flex flex-col items-center text-center">
-                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground">
-                  <step.icon size={22} />
+          <div className="animate-fade-up-delay-3 mt-10 flex flex-wrap items-center justify-center gap-3">
+            <Button asChild size="lg" className="rounded-full bg-gradient-primary px-8 text-base shadow-xl shadow-primary/30 hover:shadow-primary/50 hover:opacity-95 transition-all">
+              <Link to="/courses">Explore Courses <ArrowRight size={18} /></Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="rounded-full border-white/15 bg-white/5 px-8 text-base backdrop-blur-md hover:bg-white/10">
+              <Link to="/courses">Start Your Career</Link>
+            </Button>
+          </div>
+
+          {/* Marquee microcopy */}
+          <div className="mt-20 overflow-hidden">
+            <div className="flex w-max animate-marquee gap-12 text-sm font-medium text-muted-foreground/60">
+              {[...Array(2)].map((_, i) => (
+                <div key={i} className="flex items-center gap-12">
+                  <span>✦ Skills In. Limits Out.</span>
+                  <span>✦ Fresh Slate. Fearless Future.</span>
+                  <span>✦ Dream It. Slate It. Own It.</span>
+                  <span>✦ Your Future. Your Rules.</span>
+                  <span>✦ New Skills. Fresh Start. Clean Slate.</span>
                 </div>
-                <h4 className="mt-3 text-sm font-bold">{step.label}</h4>
-                <p className="mt-1 text-xs text-muted-foreground">{step.desc}</p>
-              </div>
-              {i < steps.length - 1 && (
-                <div className="mx-6 hidden h-px w-16 bg-border md:block" />
-              )}
-              {i < steps.length - 1 && (
-                <div className="my-2 block h-8 w-px bg-border md:hidden" />
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    {/* ── TESTIMONIALS ── */}
-    <section className="container py-16">
-      <h2 className="text-center text-2xl font-bold tracking-tight md:text-3xl">
-        What Our Students Say
-      </h2>
-      <div className="mt-10 grid gap-6 md:grid-cols-3">
-        {testimonials.map((t) => (
-          <div key={t.name} className="rounded-xl border border-border bg-card p-6 transition-shadow hover:shadow-md">
-            <Quote size={20} className="text-primary/40" />
-            <p className="mt-3 text-sm text-muted-foreground leading-relaxed">"{t.quote}"</p>
-            <div className="mt-4 flex items-center gap-3">
-              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">
-                {t.initials}
-              </div>
-              <div>
-                <p className="text-sm font-semibold">{t.name}</p>
-                <p className="text-xs text-muted-foreground">{t.role}</p>
-              </div>
+              ))}
             </div>
           </div>
-        ))}
-      </div>
-    </section>
+        </div>
+      </section>
 
-    {/* ── FINAL CTA ── */}
-    <section className="bg-primary">
-      <div className="container py-16 text-center">
-        <h2 className="text-2xl font-bold text-primary-foreground md:text-3xl">
-          Start Your Learning Journey
-        </h2>
-        <p className="mx-auto mt-3 max-w-md text-primary-foreground/80">
-          Join 15,000+ learners building real skills for real careers.
-        </p>
-        <Button asChild size="lg" variant="secondary" className="mt-6">
-          <Link to="/courses">Explore Courses <ArrowRight size={16} /></Link>
-        </Button>
-      </div>
-    </section>
-  </PageLayout>
-);
+      {/* ─────────── WHY SLATE ─────────── */}
+      <section className="relative py-24 md:py-32">
+        <div className="container">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">Why Slate</p>
+            <h2 className="mt-4 font-display text-4xl font-bold tracking-tight md:text-5xl">
+              Because <span className="text-gradient-brand">average</span> was never your thing.
+            </h2>
+            <p className="mt-4 text-muted-foreground">
+              Built for learners who want results, not certificates that collect dust.
+            </p>
+          </div>
+
+          <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {stats.map((s) => (
+              <div
+                key={s.title}
+                className="group relative overflow-hidden rounded-3xl border border-border bg-card/40 p-8 backdrop-blur-md glow-hover"
+              >
+                <div className="absolute -right-12 -top-12 h-40 w-40 rounded-full bg-gradient-primary opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-30" />
+                <div className="relative">
+                  <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                    <s.icon size={20} />
+                  </div>
+                  <Counter end={s.value} suffix={s.suffix} />
+                  <h3 className="mt-3 font-display text-lg font-semibold">{s.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─────────── COURSES ─────────── */}
+      <section className="relative overflow-hidden py-24 md:py-32">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
+        <div className="container relative">
+          <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+            <div className="max-w-xl">
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">Catalogue</p>
+              <h2 className="mt-4 font-display text-4xl font-bold tracking-tight md:text-5xl">
+                What's on your <span className="text-gradient-brand">slate?</span>
+              </h2>
+              <p className="mt-4 text-muted-foreground">
+                From design to data, from 3D to marketing — pick a skill, start a journey, own the outcome.
+              </p>
+            </div>
+            <Button asChild variant="outline" className="rounded-full border-white/15 bg-white/5 backdrop-blur">
+              <Link to="/courses">View all courses <ArrowRight size={14} /></Link>
+            </Button>
+          </div>
+
+          {/* Horizontal scroll slider */}
+          <div className="mt-12 -mx-4 overflow-x-auto scrollbar-hide px-4 pb-6">
+            <div className="flex gap-6">
+              {courses.map((c) => (
+                <Link
+                  key={c.title}
+                  to="/courses"
+                  className={`group relative flex min-w-[300px] max-w-[340px] shrink-0 flex-col overflow-hidden rounded-3xl border border-border bg-card p-7 glow-hover sm:min-w-[340px]`}
+                >
+                  <div className={`absolute inset-0 bg-gradient-to-br ${c.tint} opacity-0 transition-opacity duration-500 group-hover:opacity-100`} />
+                  <div className="relative flex flex-1 flex-col">
+                    <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-primary shadow-lg shadow-primary/20">
+                      <c.icon size={24} className="text-white" />
+                    </div>
+                    <h3 className="font-display text-xl font-bold">{c.title}</h3>
+                    <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{c.desc}</p>
+                    <div className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-primary">
+                      Know More
+                      <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          <p className="mt-8 text-center text-sm text-muted-foreground">
+            "Learning feels less like a chore and more like a cheat code."
+          </p>
+        </div>
+      </section>
+
+      {/* ─────────── TESTIMONIALS ─────────── */}
+      <section className="relative py-24 md:py-32">
+        <div className="container">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">Slate-ers</p>
+            <h2 className="mt-4 font-display text-4xl font-bold tracking-tight md:text-5xl">
+              What our students <span className="text-gradient-brand">actually say.</span>
+            </h2>
+            <p className="mt-4 text-muted-foreground">Real stories. Real outcomes. Zero scripted hype.</p>
+          </div>
+
+          {/* Featured testimonial */}
+          <div className="mx-auto mt-14 max-w-3xl">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 glass p-8 md:p-12">
+              <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-primary/30 blur-3xl" />
+              <div className="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-accent/20 blur-3xl" />
+              <div className="relative">
+                <Quote size={36} className="text-primary/60" />
+                <p key={tIdx} className="animate-fade-up mt-5 font-display text-2xl font-medium leading-relaxed md:text-3xl">
+                  "{testimonials[tIdx].quote}"
+                </p>
+                <div className="mt-8 flex items-center justify-between">
+                  <div className="flex items-center gap-4">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-primary text-sm font-bold text-white">
+                      {testimonials[tIdx].initials}
+                    </div>
+                    <div>
+                      <p className="font-semibold">{testimonials[tIdx].name}</p>
+                      <p className="text-sm text-muted-foreground">{testimonials[tIdx].role}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-0.5">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star key={i} size={14} className="fill-yellow-400 text-yellow-400" />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Dots & arrows */}
+            <div className="mt-6 flex items-center justify-center gap-4">
+              <button
+                onClick={() => setTIdx((p) => (p - 1 + testimonials.length) % testimonials.length)}
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-all hover:border-primary/50 hover:text-primary"
+                aria-label="Previous"
+              >
+                <ChevronLeft size={16} />
+              </button>
+              <div className="flex gap-2">
+                {testimonials.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setTIdx(i)}
+                    className={`h-1.5 rounded-full transition-all ${
+                      i === tIdx ? "w-8 bg-primary" : "w-1.5 bg-border hover:bg-muted-foreground"
+                    }`}
+                    aria-label={`Go to ${i + 1}`}
+                  />
+                ))}
+              </div>
+              <button
+                onClick={() => setTIdx((p) => (p + 1) % testimonials.length)}
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-all hover:border-primary/50 hover:text-primary"
+                aria-label="Next"
+              >
+                <ChevronRight size={16} />
+              </button>
+            </div>
+          </div>
+
+          <p className="mt-12 text-center text-xs uppercase tracking-widest text-muted-foreground/60">
+            Real Google Reviews coming soon · Video testimonials in production
+          </p>
+        </div>
+      </section>
+
+      {/* ─────────── FINAL CTA ─────────── */}
+      <section className="relative overflow-hidden py-24 md:py-32">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-accent/20 to-primary/30 animate-gradient" />
+        <div className="absolute inset-0 grid-bg opacity-40" />
+        <div className="absolute left-1/2 top-1/2 -z-10 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/40 blur-[120px] animate-pulse-glow" />
+
+        <div className="container relative text-center">
+          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-primary-foreground/80">
+            Your move
+          </p>
+          <h2 className="mx-auto mt-5 max-w-3xl font-display text-5xl font-bold leading-[1.05] tracking-tight md:text-7xl">
+            <span className="text-gradient">Your story isn't</span><br />
+            <span className="text-gradient-brand">written yet.</span>
+          </h2>
+          <p className="mx-auto mt-6 max-w-xl text-base text-foreground/80 md:text-lg">
+            Join thousands of learners who chose to pick up their slate and start building something brilliant.
+          </p>
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+            <Button asChild size="lg" className="rounded-full bg-white px-10 text-base font-bold text-background shadow-2xl hover:bg-white/90">
+              <Link to="/courses">ENROL FOR FREE <ArrowRight size={18} /></Link>
+            </Button>
+            <Button asChild size="lg" variant="ghost" className="rounded-full px-8 text-base hover:bg-white/10">
+              <Link to="/about">Talk to a mentor</Link>
+            </Button>
+          </div>
+          <p className="mt-12 font-display text-sm italic text-foreground/60">
+            "Let's build something brilliant. Starting with you."
+          </p>
+        </div>
+      </section>
+    </PageLayout>
+  );
+};
 
 export default Index;
