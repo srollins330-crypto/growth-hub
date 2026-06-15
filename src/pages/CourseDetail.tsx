@@ -217,6 +217,7 @@ const CourseDetail = () => {
   }, []);
 
   return (
+    <div className="light bg-background text-foreground">
     <PageLayout>
       {/* ── HERO ─────────────────────────────── */}
       <section className="relative overflow-hidden bg-hero">
