@@ -717,6 +717,7 @@ const CourseDetail = () => {
         </div>
       </div>
     </PageLayout>
+    </div>
   );
 };
 
