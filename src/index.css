@@ -64,24 +64,50 @@
   }
 
   .light {
-    --background: 0 0% 99%;
-    --foreground: 230 35% 8%;
+    --background: 220 30% 98%;
+    --foreground: 230 35% 10%;
     --card: 0 0% 100%;
-    --card-foreground: 230 35% 8%;
+    --card-foreground: 230 35% 10%;
     --popover: 0 0% 100%;
-    --popover-foreground: 230 35% 8%;
+    --popover-foreground: 230 35% 10%;
     --primary: 222 95% 56%;
     --primary-foreground: 0 0% 100%;
+    --primary-glow: 220 100% 70%;
     --secondary: 230 20% 96%;
-    --secondary-foreground: 230 35% 8%;
+    --secondary-foreground: 230 35% 10%;
     --muted: 230 14% 95%;
-    --muted-foreground: 230 10% 45%;
+    --muted-foreground: 230 10% 40%;
     --accent: 260 85% 60%;
     --accent-foreground: 0 0% 100%;
     --border: 230 14% 90%;
     --input: 230 14% 90%;
     --ring: 222 95% 56%;
-    --surface: 230 20% 97%;
+    --surface: 220 25% 96%;
+
+    --gradient-hero: radial-gradient(ellipse at top, hsl(222 95% 60% / 0.18), transparent 60%),
+                     radial-gradient(ellipse at bottom right, hsl(260 85% 65% / 0.14), transparent 50%),
+                     linear-gradient(180deg, hsl(220 30% 98%), hsl(220 30% 96%));
+    --shadow-card: 0 10px 40px -12px hsl(230 40% 30% / 0.12);
+    --shadow-glow: 0 0 60px -10px hsl(222 95% 60% / 0.35);
+  }
+
+  .light .glass {
+    background: hsl(0 0% 100% / 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid hsl(230 20% 88% / 0.9);
+    box-shadow: 0 4px 24px -12px hsl(230 40% 30% / 0.08);
+  }
+  .light .glass-strong {
+    background: hsl(0 0% 100% / 0.92);
+    backdrop-filter: blur(24px);
+    border: 1px solid hsl(230 20% 88%);
+    box-shadow: 0 10px 40px -16px hsl(230 40% 30% / 0.15);
+  }
+  .light .grid-bg {
+    background-image:
+      linear-gradient(hsl(230 30% 20% / 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(230 30% 20% / 0.05) 1px, transparent 1px);
   }
 }
 
