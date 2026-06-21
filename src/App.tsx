@@ -37,7 +37,7 @@ import Assignments from "./admin/pages/academy/Assignments";
 import Certificates from "./admin/pages/academy/Certificates";
 
 import HiringPartners from "./admin/pages/placements/HiringPartners";
-import StudentPlacements from "./admin/pages/placements/StudentPlacements";
+import StudentPlacementsAdmin from "./admin/pages/placements/StudentPlacements";
 import Opportunities from "./admin/pages/placements/Opportunities";
 import SuccessStories from "./admin/pages/placements/SuccessStories";
 import PlacementAnalytics from "./admin/pages/placements/PlacementAnalytics";
@@ -56,6 +56,17 @@ import MarketingCoupons from "./admin/pages/marketing/Coupons";
 
 import Installments from "./admin/pages/finance/Installments";
 import RevenueReports from "./admin/pages/finance/RevenueReports";
+
+import StudentDashboard from "./student/pages/Dashboard";
+import StudentMyCourse from "./student/pages/MyCourse";
+import StudentAssignments from "./student/pages/Assignments";
+import StudentAttendance from "./student/pages/Attendance";
+import StudentPortfolio from "./student/pages/Portfolio";
+import StudentPlacements from "./student/pages/Placements";
+import StudentPayments from "./student/pages/Payments";
+import StudentDocuments from "./student/pages/Documents";
+import StudentProfile from "./student/pages/Profile";
+import StudentSupport from "./student/pages/Support";
 
 const queryClient = new QueryClient();
 
@@ -103,7 +114,7 @@ const App = () => (
 
           {/* Placements */}
           <Route path="/admin/placements/partners" element={<HiringPartners />} />
-          <Route path="/admin/placements/students" element={<StudentPlacements />} />
+          <Route path="/admin/placements/students" element={<StudentPlacementsAdmin />} />
           <Route path="/admin/placements/opportunities" element={<Opportunities />} />
           <Route path="/admin/placements/success-stories" element={<SuccessStories />} />
           <Route path="/admin/placements/analytics" element={<PlacementAnalytics />} />
@@ -125,6 +136,18 @@ const App = () => (
           {/* Finance */}
           <Route path="/admin/finance/installments" element={<Installments />} />
           <Route path="/admin/finance/revenue" element={<RevenueReports />} />
+
+          {/* Student Portal */}
+          <Route path="/student" element={<StudentDashboard />} />
+          <Route path="/student/course" element={<StudentMyCourse />} />
+          <Route path="/student/assignments" element={<StudentAssignments />} />
+          <Route path="/student/attendance" element={<StudentAttendance />} />
+          <Route path="/student/portfolio" element={<StudentPortfolio />} />
+          <Route path="/student/placements" element={<StudentPlacements />} />
+          <Route path="/student/payments" element={<StudentPayments />} />
+          <Route path="/student/documents" element={<StudentDocuments />} />
+          <Route path="/student/profile" element={<StudentProfile />} />
+          <Route path="/student/support" element={<StudentSupport />} />
 
           <Route path="*" element={<NotFound />} />
         </Routes>
