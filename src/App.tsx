@@ -37,7 +37,7 @@ import Assignments from "./admin/pages/academy/Assignments";
 import Certificates from "./admin/pages/academy/Certificates";
 
 import HiringPartners from "./admin/pages/placements/HiringPartners";
-import StudentPlacements from "./admin/pages/placements/StudentPlacements";
+import StudentPlacementsAdmin from "./admin/pages/placements/StudentPlacements";
 import Opportunities from "./admin/pages/placements/Opportunities";
 import SuccessStories from "./admin/pages/placements/SuccessStories";
 import PlacementAnalytics from "./admin/pages/placements/PlacementAnalytics";
