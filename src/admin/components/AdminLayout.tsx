@@ -7,7 +7,7 @@ import {
   Phone, ListChecks, Megaphone, Video, Library, Award, FileBadge,
   Building2, Briefcase, Trophy, LineChart, Layout, Menu as MenuIcon,
   FormInput, Globe, Star, Mail, MessageSquare, Gift, Link2, Ticket,
-  Wallet, Receipt, TrendingUp,
+  Wallet, Receipt, TrendingUp, Target,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
