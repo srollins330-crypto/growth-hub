@@ -26,6 +26,7 @@ const NAV: NavGroup[] = [
   {
     label: "CRM",
     items: [
+      { to: "/admin/crm/command-center", label: "Command Center", icon: Target },
       { to: "/admin/leads", label: "Pipelines", icon: Sparkles },
       { to: "/admin/students", label: "Students", icon: Users },
       { to: "/admin/crm/follow-ups", label: "Follow-ups", icon: ListChecks },
