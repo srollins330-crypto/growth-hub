@@ -30,6 +30,8 @@ import AdminSettings from "./admin/pages/Settings";
 import FollowUps from "./admin/pages/crm/FollowUps";
 import CallLogs from "./admin/pages/crm/CallLogs";
 import Campaigns from "./admin/pages/crm/Campaigns";
+import LeadWorkspace from "./admin/pages/crm/LeadWorkspace";
+import CommandCenter from "./admin/pages/crm/CommandCenter";
 
 import RecordedCourses from "./admin/pages/academy/RecordedCourses";
 import KnowledgeHub from "./admin/pages/academy/KnowledgeHub";
