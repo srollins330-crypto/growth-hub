@@ -91,6 +91,8 @@ const App = () => (
           {/* Admin */}
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/admin/leads" element={<AdminLeads />} />
+          <Route path="/admin/leads/:id" element={<LeadWorkspace />} />
+          <Route path="/admin/crm/command-center" element={<CommandCenter />} />
           <Route path="/admin/students" element={<AdminStudents />} />
           <Route path="/admin/courses" element={<AdminCourses />} />
           <Route path="/admin/classes" element={<AdminClasses />} />
