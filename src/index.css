@@ -194,3 +194,20 @@
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
+
+/* ─── CRM scope: Plus Jakarta Sans + #0037FF primary ─── */
+.crm-scope {
+  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  --primary: 224 100% 50%;        /* #0037FF */
+  --primary-foreground: 0 0% 100%;
+  --ring: 224 100% 50%;
+  --radius: 0.75rem;
+}
+.crm-scope.light, .light .crm-scope {
+  --primary: 224 100% 50%;
+}
+.crm-scope .crm-tone-red    { color: hsl(0 84% 55%);   background: hsl(0 84% 55% / .08);   }
+.crm-scope .crm-tone-orange { color: hsl(28 96% 50%);  background: hsl(28 96% 50% / .08);  }
+.crm-scope .crm-tone-blue   { color: hsl(224 100% 50%); background: hsl(224 100% 50% / .08); }
+.crm-scope .crm-tone-green  { color: hsl(152 70% 38%); background: hsl(152 70% 38% / .08); }
+.crm-scope .crm-tone-slate  { color: hsl(220 14% 46%); background: hsl(220 14% 46% / .08); }
