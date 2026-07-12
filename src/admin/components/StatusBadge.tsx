@@ -17,11 +17,11 @@ const map = (label: string): keyof typeof TONES => {
   return "neutral";
 };
 
-const StatusBadge = ({ children, tone }: { children: string; tone?: keyof typeof TONES }) => (
+const StatusBadge = ({ children, tone }: { children: React.ReactNode; tone?: keyof typeof TONES }) => (
   <span
     className={cn(
       "inline-flex items-center rounded-full border px-2 py-0.5 text-[11px] font-medium",
-      TONES[tone || map(children)],
+      TONES[tone || (typeof children === "string" ? map(children) : "neutral")],
     )}
   >
     {children}
