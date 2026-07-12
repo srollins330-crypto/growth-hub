@@ -33,10 +33,10 @@ const NAV: NavGroup[] = [
 ];
 
 const QUICK = [
-  { label: "Download Certificate", icon: Award },
-  { label: "Upload Assignment", icon: Upload },
-  { label: "View Fee Receipt", icon: Receipt },
-  { label: "Book Mentor Session", icon: Video },
+  { label: "Download Certificate", icon: Award, to: "/student/certificate" },
+  { label: "Upload Assignment", icon: Upload, to: "/student/upload-assignment" },
+  { label: "View Fee Receipt", icon: Receipt, to: "/student/fee-receipt" },
+  { label: "Book Mentor Session", icon: Video, to: "/student/book-mentor" },
 ];
 
 const useTheme = () => {
@@ -110,13 +110,18 @@ const SidebarContent = ({ onNavigate }: { onNavigate?: () => void }) => {
             {QUICK.map((q) => {
               const Icon = q.icon;
               return (
-                <button
+                <NavLink
                   key={q.label}
-                  className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                  to={q.to}
+                  onClick={onNavigate}
+                  className={({ isActive }) => cn(
+                    "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                    isActive ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-secondary hover:text-foreground",
+                  )}
                 >
                   <Icon size={16} />
                   {q.label}
-                </button>
+                </NavLink>
               );
             })}
           </div>
