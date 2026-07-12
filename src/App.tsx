@@ -69,6 +69,10 @@ import StudentPayments from "./student/pages/Payments";
 import StudentDocuments from "./student/pages/Documents";
 import StudentProfile from "./student/pages/Profile";
 import StudentSupport from "./student/pages/Support";
+import StudentCertificate from "./student/pages/Certificate";
+import StudentUploadAssignment from "./student/pages/UploadAssignment";
+import StudentFeeReceipt from "./student/pages/FeeReceipt";
+import StudentBookMentor from "./student/pages/BookMentor";
 
 const queryClient = new QueryClient();
 
@@ -152,6 +156,10 @@ const App = () => (
           <Route path="/student/documents" element={<StudentDocuments />} />
           <Route path="/student/profile" element={<StudentProfile />} />
           <Route path="/student/support" element={<StudentSupport />} />
+          <Route path="/student/certificate" element={<StudentCertificate />} />
+          <Route path="/student/upload-assignment" element={<StudentUploadAssignment />} />
+          <Route path="/student/fee-receipt" element={<StudentFeeReceipt />} />
+          <Route path="/student/book-mentor" element={<StudentBookMentor />} />
 
           <Route path="*" element={<NotFound />} />
         </Routes>
